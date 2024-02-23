@@ -1,0 +1,29 @@
+[submodule "package/busybox/busybox"]
+	path = package/busybox/busybox
+	url = https://git.busybox.net/busybox.git
+	branch = 1_36_stable
+[submodule "package/ekermit/ekermit"]
+	path = package/ekermit/ekermit
+	url = https://github.com/KermitProject/ekermit.git
+[submodule "package/openssl/openssl"]
+	path = package/openssl/openssl
+	url = https://github.com/openssl/openssl
+[submodule "package/zlib/zlib"]
+	path = package/zlib/zlib
+	url = https://github.com/madler/zlib
+[submodule "package/git/git"]
+	path = package/git/git
+	url = https://github.com/git/git
+[submodule "package/openssh/openssh"]
+	path = package/openssh/openssh
+	url = https://github.com/openssh/openssh-portable.git
+[submodule "package/curl/curl"]
+	path = package/curl/curl
+	url = https://github.com/curl/curl
+[submodule "package/qt5/qt5"]
+	path = package/qt5/qt5
+	url = https://code.qt.io/qt/qt5.git
+	branch = 5.12
+[submodule "toolchain/riscv-gnu-toolchain"]
+	path = toolchain/riscv-gnu-toolchain
+	url = https://github.com/riscv-collab/riscv-gnu-toolchain
