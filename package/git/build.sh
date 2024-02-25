@@ -9,6 +9,7 @@ make configure
 ac_cv_fread_reads_directories=yes \
 ac_cv_snprintf_returns_bogus=yes \
 ac_cv_prog_CURL_CONFIG=$(find_pkg_root ${TMPDIR} curl)/bin/curl-config \
+ ac_cv_iconv_omits_bom=no \
 ./configure \
 	${GNU_CONFIGURE_OPTS} \
 	--with-curl \

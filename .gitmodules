@@ -27,3 +27,15 @@
 [submodule "toolchain/riscv-gnu-toolchain"]
 	path = toolchain/riscv-gnu-toolchain
 	url = https://github.com/riscv-collab/riscv-gnu-toolchain
+[submodule "package/libfuse/libfuse"]
+	path = package/libfuse/libfuse
+	url = https://github.com/libfuse/libfuse
+[submodule "package/gnu-make/gnu-make"]
+	path = package/gnu-make/gnu-make
+	url = https://git.savannah.gnu.org/git/make.git
+[submodule "package/gnu-emacs/gnu-emacs"]
+	path = package/gnu-emacs/gnu-emacs
+	url = https://git.savannah.gnu.org/git/emacs.git
+[submodule "package/ncurses/ncurses"]
+	path = package/ncurses/ncurses
+	url = https://github.com/mirror/ncurses

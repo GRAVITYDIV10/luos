@@ -5,7 +5,12 @@ export PKGVER=3.2.1
 
 set -eu
 cd ${PKGBUILD}
-./Configure linux-generic64 shared \
+TGT=linux-generic64
+if [ "${CROSS_COMPILE}" = "riscv64-unknown-linux-gnu" ]
+then
+	TGT=linux64-riscv64
+fi
+./Configure ${TGT} shared \
 	--cross-compile-prefix=${CROSS_COMPILE}- \
 	--prefix=/usr --openssldir=/etc/ssl
 

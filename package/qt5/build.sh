@@ -6,15 +6,19 @@ export PKGVER=5.12
 set -eu
 cd ${PKGBUILD}
 ./configure \
-	-device linux-generic-g++\
-	-device-option CROSS_COMPILE=${CROSS_COMPILE}-\
+	-xplatform ${CROSS_COMPILE} \
+	-extprefix ${PKGROOT}/usr/qt5\
 	-prefix /usr/qt5\
-	-c++std c++14\
 	-opensource -confirm-license\
+	-debug -ltcg -silent -ccache\
+	-compile-examples\
 	-shared -no-opengl -gui -widgets\
-	-qpa linuxfb -linuxfb
+	-qpa linuxfb -linuxfb -ssl\
+        -I$(find_pkg_root ${TMPDIR} openssl)/usr/include\
+        -L$(find_pkg_root ${TMPDIR} openssl)/usr/lib
+	
 make -j`nproc`
-make DESTDIR="${PKGROOT}" install
+make install
 
 remove_la_files "${PKGROOT}"
 make_pkg "${PKGROOT}" "${PKGOUT}"
