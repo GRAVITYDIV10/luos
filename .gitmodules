@@ -39,3 +39,48 @@
 [submodule "package/ncurses/ncurses"]
 	path = package/ncurses/ncurses
 	url = https://github.com/mirror/ncurses
+[submodule "package/fuse-overlayfs/fuse-overlayfs"]
+	path = package/fuse-overlayfs/fuse-overlayfs
+	url = https://github.com/containers/fuse-overlayfs
+[submodule "package/strace/strace"]
+	path = package/strace/strace
+	url = https://github.com/strace/strace
+[submodule "package/evtest/evtest"]
+	path = package/evtest/evtest
+	url = https://gitlab.freedesktop.org/libevdev/evtest
+[submodule "package/linux/linux"]
+	path = package/linux/linux
+	url = https://mirrors.bfsu.edu.cn/git/linux.git
+[submodule "package/vmtouch/vmtouch"]
+	path = package/vmtouch/vmtouch
+	url = https://github.com/hoytech/vmtouch
+[submodule "package/squashfs-tools-ng/squashfs-tools-ng"]
+	path = package/squashfs-tools-ng/squashfs-tools-ng
+	url = https://github.com/AgentD/squashfs-tools-ng
+[submodule "package/lz4/lz4"]
+	path = package/lz4/lz4
+	url = https://github.com/lz4/lz4.git
+[submodule "package/alsa-lib/alsa-lib"]
+	path = package/alsa-lib/alsa-lib
+	url = https://github.com/alsa-project/alsa-lib
+[submodule "package/alsa-utils/alsa-utils"]
+	path = package/alsa-utils/alsa-utils
+	url = https://github.com/alsa-project/alsa-utils
+[submodule "package/libexpat/libexpat"]
+	path = package/libexpat/libexpat
+	url = https://github.com/libexpat/libexpat
+[submodule "package/dbus/dbus"]
+	path = package/dbus/dbus
+	url = https://gitlab.freedesktop.org/dbus/dbus
+[submodule "package/libnl/libnl"]
+	path = package/libnl/libnl
+	url = https://github.com/thom311/libnl
+[submodule "package/hostap/hostap"]
+	path = package/hostap/hostap
+	url = git://w1.fi/hostap.git
+[submodule "package/libpcap/libpcap"]
+	path = package/libpcap/libpcap
+	url = https://github.com/the-tcpdump-group/libpcap.git
+[submodule "package/tcpdump/tcpdump"]
+	path = package/tcpdump/tcpdump
+	url = https://github.com/the-tcpdump-group/tcpdump

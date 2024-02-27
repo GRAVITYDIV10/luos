@@ -4,10 +4,10 @@ export LUOS_PKGVER=5.12
 . ../../utils.sh
 
 set_if_noset OPENSSL_PKGROOT "$(find_pkg_root ${LUOS_TMPDIR} openssl)"
-set_if_noset ZLIB_PKGROOT "$(find_pkg_root ${LUOS_TMPDIR} zlib)"
+set_if_noset ALSA_LIB_PKGROOT "$(find_pkg_root ${LUOS_TMPDIR} alsa-lib)"
 
 err_if_not_found "${OPENSSL_PKGROOT}" "package openssl not found"
-err_if_not_found "${ZLIB_PKGROOT}" "package zlib not found"
+err_if_not_found "${ALSA_LIB_PKGROOT}" "package alsa-lib not found"
 
 cd ${LUOS_PKGBUILD} || exit 1
 ./configure \
@@ -18,12 +18,11 @@ cd ${LUOS_PKGBUILD} || exit 1
 	-debug -ltcg -silent -ccache\
 	-compile-examples\
 	-shared -no-opengl -gui -widgets\
-	-qpa linuxfb -linuxfb -ssl\
+	-qpa linuxfb -linuxfb -ssl -alsa\
 	-I${OPENSSL_PKGROOT}/usr/include \
 	-L${OPENSSL_PKGROOT}/usr/lib \
-	-I${ZLIB_PKGROOT}/usr/include \
-	-L${ZLIB_PKGROOT}/usr/lib || exit 1
-	
+	-I${ALSA_LIB_PKGROOT}/usr/include \
+	-L${ALSA_LIB_PKGROOT}/usr/lib || exit 1
 make -j`nproc` || exit 1
 make install || exit 1
 
