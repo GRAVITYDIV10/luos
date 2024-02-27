@@ -6,84 +6,66 @@ git_get_commit() {
 	then
 		return 1
 	fi
-	set -eu
         olddir=$(pwd)
         cd "${1}"
         git rev-parse HEAD
         cd "${olddir}"
-	set +eu
 	return 0
 }
 
 make_pkg() {
-	set -eu
 	mksquashfs "${1}" "${2}" \
 		-comp lz4 -Xhc -reproducible \
 		-mkfs-time 0 -fstime 0 -all-time 0 \
 		-all-root -exit-on-error \
 		-info -no-progress || return 1
-	set +eu
 	return 0
 }
 
 err_if_noset() {
-	set -eu
 	if [ -z "$(printenv "${1}")" ]
 	then
 		echo "${1}: ${2}"
 		exit 1
 	fi
-	set +eu
 }
 
 set_if_noset() {
-	set -eu
 	if [ -z "$(printenv "${1}")" ]
 	then
 		export "${1}"="${2}"
 	fi
-	set +eu
 }
 
 err_if_not_found() {
-	set -eu
 	if [ ! -e "${1}" ]
 	then
 		echo "${1}: ${2}"
 		exit 1
 	fi
-	set +eu
 }
 
 create_dir_if_not_found() {
-	set -eu
 	if [ ! -e "${1}" ]
 	then
 		mkdir -pv "${1}"
 	fi
-	set +eu
 }
 
 delete_if_found() {
-	set -eu
 	if [ -e "${1}" ]
 	then
 		rm -rf "${1}"
 	fi
-	set +eu
 }
 
 find_pkg_root() {
-	set -eu
 	err_if_not_found "${1}"
 	find "$(realpath "${1}")" -name "${2}-*-root" -type d -maxdepth 1 | sort -V
-	set +eu
 }
 
 remove_la_files() {
-	set -eu
 	find "$(realpath "${1}")" -name '*.la' -delete
-	set +eu
 }
 
 meson_gen_cross_file() {
@@ -93,34 +75,42 @@ meson_gen_cross_file() {
 	echo "ar = '${1}-ar'"
 	echo ""
 	echo "[host_machine]"
-	echo "system = 'linux'"
+	echo "system = '${4}'"
 	echo "cpu_family = '${2}'"
 	echo "cpu = '${2}'"
 	echo "endian = '${3}'"
 }
 
-set_if_noset TOPDIR "$(realpath "$(dirname "$(realpath "${0}")")"/../../)"
-err_if_noset CROSS_COMPILE "please set env"
-set_if_noset ARCH "$(echo "${CROSS_COMPILE}" | awk -F'-' '{print $1}')"
-set_if_noset TMPDIR "${TOPDIR}/build/${CROSS_COMPILE}"
-set_if_noset PKGNAME "$(basename "$(dirname "$(realpath "${0}")")")"
-set_if_noset PKGSRC "$(dirname "$(realpath "${0}")")"/"${PKGNAME}"
-err_if_not_found "${PKGSRC}" "please check env PKGSRC"
-set_if_noset PKGVER "$(git_get_commit "${PKGSRC}")"
-set_if_noset PKGVER "$(date +%Y%m%d%H%M)"
-set_if_noset PKGBUILD "${TMPDIR}/${PKGNAME}"
-create_dir_if_not_found "$(dirname "${PKGBUILD}")"
-delete_if_found "${PKGBUILD}"
-cp -rf "${PKGSRC}" "${PKGBUILD}" || exit 1
-set_if_noset PKGROOT "${TMPDIR}/${PKGNAME}-${PKGVER}-root"
-create_dir_if_not_found "${PKGROOT}"
-set_if_noset PKGFMT "sqfs"
-set_if_noset PKGOUT "${TMPDIR}/${PKGNAME}-${PKGVER}.${PKGFMT}"
-delete_if_found "${PKGOUT}"
+autoconf_gen_cross_args() {
+	echo -n "--prefix=/usr "
+	echo -n "--sysconfdir=/etc "
+	echo -n "--localstatedir=/var "
+	echo -n "--libdir=/usr/lib "
+	echo -n "--localstatedir=/var "
+	echo -n "--libdir=/usr/lib "
+	echo -n "--host=${1} "
+	echo -n "--enable-shared "
+	echo -n "--enable-static "
+	echo -n "PKG_CONFIG=$(which false) "
+}
 
-export GNU_CONFIGURE_OPTS="
-${GNU_CONFIGURE_OPTS} \
---prefix=/usr --sysconfdir=/etc \
---localstatedir=/var --libdir=/usr/lib \
---host=${CROSS_COMPILE} \
---enable-shared --enable-static "
+set_if_noset LUOS_TOPDIR "$(realpath "$(dirname "$(realpath "${0}")")"/../../)"
+err_if_noset LUOS_CROSS_COMPILE "please set env"
+set_if_noset LUOS_ARCH "$(echo "${LUOS_CROSS_COMPILE}" | awk -F'-' '{print $1}')"
+set_if_noset LUOS_OS "$(echo "${LUOS_CROSS_COMPILE}" | awk -F'-' '{print $(NF - 1)}')"
+set_if_noset LUOS_LIBC "$(echo "${LUOS_CROSS_COMPILE}" | awk -F'-' '{print $(NF)}')"
+set_if_noset LUOS_TMPDIR "${LUOS_TOPDIR}/build/${LUOS_CROSS_COMPILE}"
+set_if_noset LUOS_PKGNAME "$(basename "$(dirname "$(realpath "${0}")")")"
+set_if_noset LUOS_PKGSRC "$(dirname "$(realpath "${0}")")"/"${LUOS_PKGNAME}"
+err_if_not_found "${LUOS_PKGSRC}" "please check env LUOS_PKGSRC"
+set_if_noset LUOS_PKGVER "$(git_get_commit "${LUOS_PKGSRC}")"
+set_if_noset LUOS_PKGVER "$(date +%Y%m%d%H%M)"
+set_if_noset LUOS_PKGBUILD "${LUOS_TMPDIR}/${LUOS_PKGNAME}"
+create_dir_if_not_found "$(dirname "${LUOS_PKGBUILD}")"
+delete_if_found "${LUOS_PKGBUILD}"
+cp -rf "${LUOS_PKGSRC}" "${LUOS_PKGBUILD}" || exit 1
+set_if_noset LUOS_PKGROOT "${LUOS_TMPDIR}/${LUOS_PKGNAME}-${LUOS_PKGVER}-root"
+create_dir_if_not_found "${LUOS_PKGROOT}"
+set_if_noset LUOS_PKGFMT "sqfs"
+set_if_noset LUOS_PKGOUT "${LUOS_TMPDIR}/${LUOS_PKGNAME}-${LUOS_PKGVER}.${LUOS_PKGFMT}"
+delete_if_found "${LUOS_PKGOUT}"

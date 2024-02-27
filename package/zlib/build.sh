@@ -1,18 +1,20 @@
 #!/usr/bin/env ash
 
-export PKGVER=1.3.1
+export LUOS_PKGVER=1.3.1
 . ../../utils.sh
 
 set -eu
-cd ${PKGBUILD}
-CC=${CROSS_COMPILE}-cc \
-LD=${CROSS_COMPILE}-ld \
-AR=${CROSS_COMPILE}-ar \
-RANLIB=${CROSS_COMPILE}-ranlib \
-./configure --prefix=/usr \
-	--static --shared
+cd ${LUOS_PKGBUILD}
+export CC=${LUOS_CROSS_COMPILE}-cc 
+export LD=${LUOS_CROSS_COMPILE}-ld
+export AR=${LUOS_CROSS_COMPILE}-ar
+export RANLIB=${LUOS_CROSS_COMPILE}-ranlib
+./configure --prefix=/usr --static 
 make -j`nproc`
-make DESTDIR="${PKGROOT}" install
+make DESTDIR="${LUOS_PKGROOT}" install
+./configure --prefix=/usr --shared
+make -j`nproc`
+make DESTDIR="${LUOS_PKGROOT}" install
 
-remove_la_files "${PKGROOT}"
-make_pkg "${PKGROOT}" "${PKGOUT}"
+remove_la_files "${LUOS_PKGROOT}"
+make_pkg "${LUOS_PKGROOT}" "${LUOS_PKGOUT}"

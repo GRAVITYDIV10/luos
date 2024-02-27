@@ -1,11 +1,11 @@
 #!/usr/bin/env ash
 
 set -eu
-export PKGSRC=$(${CROSS_COMPILE}-cc -print-sysroot)
+export LUOS_PKGSRC=$(${LUOS_CROSS_COMPILE}-cc -print-sysroot)
 set +eu
 . ../../utils.sh
 
 set -eu
-cd ${PKGBUILD}
-cp -arv ./* "${PKGROOT}/"
-make_pkg "${PKGROOT}" "${PKGOUT}"
+cd ${LUOS_PKGBUILD}
+cp -arvf ./* "${LUOS_PKGROOT}/"
+make_pkg "${LUOS_PKGROOT}" "${LUOS_PKGOUT}"

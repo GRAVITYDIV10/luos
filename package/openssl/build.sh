@@ -1,21 +1,25 @@
 #!/usr/bin/env ash
 
-export PKGVER=3.2.1
+export LUOS_PKGVER=3.2.1
 . ../../utils.sh
 
-set -eu
-cd ${PKGBUILD}
-TGT=linux-generic64
-if [ "${CROSS_COMPILE}" = "riscv64-unknown-linux-gnu" ]
+if [ -z "${TGT}" ]
 then
-	TGT=linux64-riscv64
+	TGT=${LUOS_OS}-generic64
+fi
+
+set -eu
+cd ${LUOS_PKGBUILD}
+if [ "${LUOS_ARCH}" = "riscv64" ]
+then
+	TGT=${LUOS_OS}64-${LUOS_ARCH}
 fi
 ./Configure ${TGT} shared \
-	--cross-compile-prefix=${CROSS_COMPILE}- \
+	--cross-compile-prefix=${LUOS_CROSS_COMPILE}- \
 	--prefix=/usr --openssldir=/etc/ssl
 
 make -j`nproc`
-make DESTDIR="${PKGROOT}" install
+make DESTDIR="${LUOS_PKGROOT}" install
 
-remove_la_files "${PKGROOT}"
-make_pkg "${PKGROOT}" "${PKGOUT}"
+remove_la_files "${LUOS_PKGROOT}"
+make_pkg "${LUOS_PKGROOT}" "${LUOS_PKGOUT}"

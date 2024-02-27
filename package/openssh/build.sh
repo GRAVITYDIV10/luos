@@ -1,22 +1,26 @@
 #!/usr/bin/env ash
 
-export PKGVER=9.6p1
+export LUOS_PKGVER=9.6p1
 . ../../utils.sh
 
-set -eu
-cd ${PKGBUILD}
-autoreconf -fi
-./configure \
-	${GNU_CONFIGURE_OPTS}\
-	--with-ssl-engine \
-        CFLAGS="-I$(find_pkg_root ${TMPDIR} zlib)/usr/include\
-                -I$(find_pkg_root ${TMPDIR} openssl)/usr/include"\
-        LDFLAGS="-L$(find_pkg_root ${TMPDIR} zlib)/usr/lib\
-                -L$(find_pkg_root ${TMPDIR} openssl)/usr/lib\
-                -Wl,-rpath-link,$(find_pkg_root ${TMPDIR} zlib)/usr/lib\
-                -Wl,-rpath-link,$(find_pkg_root ${TMPDIR} openssl)/usr/lib"
-make -j`nproc`
-make DESTDIR="${PKGROOT}" install
+set_if_noset OPENSSL_PKGROOT "$(find_pkg_root ${LUOS_TMPDIR} openssl)"
+set_if_noset ZLIB_PKGROOT "$(find_pkg_root ${LUOS_TMPDIR} zlib)"
 
-remove_la_files "${PKGROOT}"
-make_pkg "${PKGROOT}" "${PKGOUT}"
+err_if_not_found "${OPENSSL_PKGROOT}" "package openssl not found"
+err_if_not_found "${ZLIB_PKGROOT}" "package zlib not found"
+
+cd ${LUOS_PKGBUILD} || exit 1
+autoreconf -fi || exit 1
+./configure \
+	$(autoconf_gen_cross_args ${LUOS_CROSS_COMPILE}) \
+	--with-ssl-engine --disable-strip \
+        CFLAGS="-I${OPENSSL_PKGROOT}/usr/include\
+                -I${ZLIB_PKGROOT}/usr/include"\
+	LDFLAGS="-L${OPENSSL_PKGROOT}/usr/lib\
+                -L${ZLIB_PKGROOT}/usr/lib -lz" || exit 1
+
+make -j`nproc` || exit 1
+make DESTDIR="${LUOS_PKGROOT}" install || exit 1
+
+remove_la_files "${LUOS_PKGROOT}" || exit 1
+make_pkg "${LUOS_PKGROOT}" "${LUOS_PKGOUT}" || exit 1

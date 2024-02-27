@@ -1,15 +1,13 @@
 #!/usr/bin/env ash
 
-export PKGVER=4.4.1
+export LUOS_PKGVER=4.4.1
 . ../../utils.sh
 
-set -eu
-cd ${PKGBUILD}
+cd ${LUOS_PKGBUILD} || exit 1
 ./autogen.sh
-./configure \
-	${GNU_CONFIGURE_OPTS}
-make -j`nproc`
-make DESTDIR="${PKGROOT}" install
+./configure $(autoconf_gen_cross_args ${LUOS_CROSS_COMPILE}) || exit 1
+make -j`nproc` || exit 1
+make DESTDIR="${LUOS_PKGROOT}" install || exit 1
 
-remove_la_files "${PKGROOT}"
-make_pkg "${PKGROOT}" "${PKGOUT}"
+remove_la_files "${LUOS_PKGROOT}" || exit 1
+make_pkg "${LUOS_PKGROOT}" "${LUOS_PKGOUT}" || exit 1

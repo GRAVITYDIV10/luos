@@ -1,12 +1,11 @@
 #!/usr/bin/env ash
 
-export PKGVER=1.8
+export LUOS_PKGVER=1.8
 . ../../utils.sh
 
-set -eu
-cd ${PKGBUILD}
-mkdir -pv "${PKGROOT}/usr/bin"
-make CC=${CROSS_COMPILE}-cc ek
-cp -vf ./ek "${PKGROOT}/usr/bin/ek"
+cd ${LUOS_PKGBUILD} || exit 1
+mkdir -pv "${LUOS_PKGROOT}/usr/bin" || exit 1
+make CC=${LUOS_CROSS_COMPILE}-cc ek || exit 1
+cp -vf ./ek "${LUOS_PKGROOT}/usr/bin/ek" || exit 1
 
-make_pkg "${PKGROOT}" "${PKGOUT}"
+make_pkg "${LUOS_PKGROOT}" "${LUOS_PKGOUT}" || exit 1
