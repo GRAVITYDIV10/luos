@@ -1,6 +1,6 @@
 #!/usr/bin/env ash
 
-export LUOS_PKGVER=1.2.9
+export LUOS_PKGVER=1.2.11
 . ../../utils.sh
 
 cd ${LUOS_PKGBUILD} || exit 1

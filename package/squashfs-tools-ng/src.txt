@@ -1,0 +1,1 @@
+https://github.com/AgentD/squashfs-tools-ng/archive/refs/tags/v1.0.7.tar.gz

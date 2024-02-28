@@ -1,0 +1,1 @@
+https://strace.io/files/6.7/strace-6.7.tar.xz

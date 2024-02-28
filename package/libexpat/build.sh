@@ -3,7 +3,7 @@
 export LUOS_PKGVER=2.6.0
 . ../../utils.sh
 
-cd ${LUOS_PKGBUILD}/expat || exit 1
+cd ${LUOS_PKGBUILD} || exit 1
 ./buildconf.sh || exit 1
 ./configure \
 	$(autoconf_gen_cross_args ${LUOS_CROSS_COMPILE}) || exit 1

@@ -1,6 +1,6 @@
 #!/usr/bin/env ash
 
-export LUOS_PKGVER=2.43.2
+export LUOS_PKGVER=2.44.0
 . ../../utils.sh
 
 set_if_noset CURL_PKGROOT "$(find_pkg_root ${LUOS_TMPDIR} curl)"

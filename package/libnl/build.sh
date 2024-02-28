@@ -4,7 +4,6 @@ export LUOS_PKGVER=3.9.0
 . ../../utils.sh
 
 cd ${LUOS_PKGBUILD} || exit 1
-./autogen.sh || exit 1
 ./configure \
 	$(autoconf_gen_cross_args ${LUOS_CROSS_COMPILE}) || exit 1
 
