@@ -30,12 +30,6 @@
 [submodule "package/libfuse/libfuse"]
 	path = package/libfuse/libfuse
 	url = https://github.com/libfuse/libfuse
-[submodule "package/gnu-make/gnu-make"]
-	path = package/gnu-make/gnu-make
-	url = https://git.savannah.gnu.org/git/make.git
-[submodule "package/gnu-emacs/gnu-emacs"]
-	path = package/gnu-emacs/gnu-emacs
-	url = https://git.savannah.gnu.org/git/emacs.git
 [submodule "package/ncurses/ncurses"]
 	path = package/ncurses/ncurses
 	url = https://github.com/mirror/ncurses
@@ -48,9 +42,6 @@
 [submodule "package/evtest/evtest"]
 	path = package/evtest/evtest
 	url = https://gitlab.freedesktop.org/libevdev/evtest
-[submodule "package/linux/linux"]
-	path = package/linux/linux
-	url = https://mirrors.bfsu.edu.cn/git/linux.git
 [submodule "package/vmtouch/vmtouch"]
 	path = package/vmtouch/vmtouch
 	url = https://github.com/hoytech/vmtouch
