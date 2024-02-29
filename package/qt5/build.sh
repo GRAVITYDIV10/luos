@@ -29,9 +29,8 @@ qt5_gen_mkspec_qmake_conf() {
 
 cd ${LUOS_PKGBUILD} || exit 1
 mkdir -pv qtbase/mkspecs/${LUOS_CROSS_COMPILE}/
-qt5_gen_mkspec_qmake_conf ${LUOS_CROSS_COMPILE > qtbase/mkspecs/${LUOS_CROSS_COMPILE}/qmake.conf
+qt5_gen_mkspec_qmake_conf ${LUOS_CROSS_COMPILE} > qtbase/mkspecs/${LUOS_CROSS_COMPILE}/qmake.conf
 cp qtbase/mkspecs/linux-aarch64-gnu-g++/qplatformdefs.h qtbase/mkspecs/${LUOS_CROSS_COMPILE}/
-
 ./configure \
 	-xplatform ${LUOS_CROSS_COMPILE} \
 	-extprefix ${LUOS_PKGROOT}/usr/qt5\
