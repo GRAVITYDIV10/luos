@@ -23,7 +23,12 @@ set +eu
 mkdir -p build || exit 1
 cd build || exit 1
 ../configure \
-        $(autoconf_gen_cross_args ${LUOS_CROSS_COMPILE}) || exit 1
+        $(autoconf_gen_cross_args ${LUOS_CROSS_COMPILE}) \
+	--enable-languages=c,c++ --disable-multilib \
+	--disable-bootstrap --disable-libgomp \
+	--disable-libquadmath --disable-libvtv \
+	--disable-libsanitizer --disable-libmpx \
+	--target=${LUOS_CROSS_COMPILE} || exit 1
 
 make -j`nproc` || exit 1
 make DESTDIR="${LUOS_PKGROOT}" install || exit 1

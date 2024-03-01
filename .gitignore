@@ -68,3 +68,17 @@ package/mpc/mpc/*
 package/mpfr/mpfr-4.2.1.tar.xz
 package/mpfr/mpfr/*
 package/qemu/qemu-8.2.1.tar.xz
+package/ckermit/ckermit/*
+package/ckermit/main.zip
+package/coreutils/coreutils-9.4.tar.xz
+package/coreutils/coreutils/*
+package/e2fsprogs/e2fsprogs-1.47.0.tar.xz
+package/e2fsprogs/e2fsprogs/*
+package/libevent/libevent-2.1.12-stable.tar.gz
+package/libevent/libevent/*
+package/libfuse2/fuse-2.9.9.tar.gz
+package/libfuse2/libfuse2/*
+package/pppd/ppp-2.5.0.tar.gz
+package/pppd/pppd/*
+package/tmux/tmux-3.4.tar.gz
+package/tmux/tmux/*
