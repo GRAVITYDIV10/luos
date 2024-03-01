@@ -19,7 +19,6 @@ package/hostap/hostap/*
 package/hostap/hostap_2_10.tar.gz
 package/libexpat/expat-2.6.0.tar.xz
 package/libexpat/libexpat/*
-package/libfuse/*
 package/libnl/libnl-3.9.0.tar.gz
 package/libnl/libnl/*
 package/libpcap/libpcap-1.10.4.tar.gz
@@ -54,3 +53,18 @@ package/flex/flex-2.6.4.tar.gz
 package/flex/flex/*
 package/tcl/tcl/*
 package/tcl/tcl8.6.14-src.tar.gz
+package/binutils/binutils-2.42.tar.xz
+package/binutils/binutils/*
+package/gcc/gcc-13.2.0.tar.xz
+package/gcc/gcc/*
+package/glib/glib-2.79.3.tar.xz
+package/glib/glib/*
+package/gmp/gmp-6.3.0.tar.xz
+package/gmp/gmp/*
+package/libfuse/fuse-3.16.2.tar.gz
+package/libfuse/libfuse/*
+package/mpc/mpc-1.3.1.tar.gz
+package/mpc/mpc/*
+package/mpfr/mpfr-4.2.1.tar.xz
+package/mpfr/mpfr/*
+package/qemu/qemu-8.2.1.tar.xz
