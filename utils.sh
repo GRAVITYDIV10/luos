@@ -69,16 +69,16 @@ remove_la_files() {
 }
 
 meson_gen_cross_file() {
-	echo "[binaries]"
-	echo "c = '${1}-cc'"
-	echo "cpp = '${1}-c++'"
-	echo "ar = '${1}-ar'"
-	echo ""
 	echo "[host_machine]"
 	echo "system = '${4}'"
 	echo "cpu_family = '${2}'"
 	echo "cpu = '${2}'"
 	echo "endian = '${3}'"
+        echo "[binaries]"
+        echo "c = '${1}-cc'"
+        echo "cpp = '${1}-c++'"
+        echo "ar = '${1}-ar'"
+        echo ""
 }
 
 autoconf_gen_cross_args() {

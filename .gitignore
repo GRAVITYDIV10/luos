@@ -82,3 +82,9 @@ package/pppd/ppp-2.5.0.tar.gz
 package/pppd/pppd/*
 package/tmux/tmux-3.4.tar.gz
 package/tmux/tmux/*
+package/ekermit/ekermit/*
+package/ekermit/v1.18.tar.gz
+package/pcre/pcre/*
+package/pcre/pcre2-10.43.tar.bz2
+package/squashfuse/squashfuse-0.5.2.tar.gz
+package/squashfuse/squashfuse/*
